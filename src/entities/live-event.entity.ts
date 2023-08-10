@@ -3,19 +3,14 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  Generated,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class LiveEvent {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  @Generated('uuid')
-  uuid: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({
     length: 100,
@@ -26,9 +21,9 @@ export class LiveEvent {
   description: string;
 
   @Column({
-    type: 'timestamptz',
+    type: 'text',
   })
-  dateTime: Date;
+  dateTime: string;
 
   @Column('text')
   location: string;

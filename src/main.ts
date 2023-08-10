@@ -15,7 +15,9 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Eventor Swagger API')
-    .setDescription('API documentation for eventor service')
+    .setDescription(
+      'API documentation for eventor service. No pagination logic for this demo, only basic CRUD',
+    )
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

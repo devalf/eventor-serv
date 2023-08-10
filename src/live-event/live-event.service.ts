@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { LiveEvent } from '../entities';
@@ -27,5 +27,16 @@ export class LiveEventService {
 
   async createLiveEvent(liveEvent: LiveEvent): Promise<LiveEvent> {
     return this.liveEventRepository.save(liveEvent);
+  }
+
+  async deleteLiveEvent(id: string): Promise<void> {
+    await this.liveEventRepository.delete({ id });
+  }
+
+  async updateLiveEvent(
+    id: string,
+    liveEvent: LiveEvent,
+  ): Promise<UpdateResult> {
+    return this.liveEventRepository.update(id, liveEvent);
   }
 }

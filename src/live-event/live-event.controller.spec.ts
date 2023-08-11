@@ -1,18 +1,25 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { LiveEventController } from './live-event.controller';
+import { LiveEventService } from './live-event.service';
+import { DataFactory } from 'nestjs-seeder';
+import { LiveEvent } from '../entities';
 
 describe('LiveEventController', () => {
-  let controller: LiveEventController;
+  let liveEventController: LiveEventController;
+  let liveEventService: LiveEventService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [LiveEventController],
-    }).compile();
-
-    controller = module.get<LiveEventController>(LiveEventController);
+    liveEventService = new LiveEventService(undefined);
+    liveEventController = new LiveEventController(liveEventService);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  it('should return collection of `Live Events`', async () => {
+    const generatedCollection =
+      DataFactory.createForClass(LiveEvent).generate(1);
+
+    jest
+      .spyOn(liveEventService, 'getLiveEvents')
+      .mockResolvedValue(generatedCollection as any);
+
+    expect(await liveEventController.getLiveEvents()).toBe(generatedCollection);
   });
 });

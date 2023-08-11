@@ -16,7 +16,10 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Eventor Swagger API')
     .setDescription(
-      'API documentation for eventor service. No pagination logic for this demo, only basic CRUD',
+      `API documentation for eventor service. 
+       No pagination logic for this demo, only basic CRUD. 
+       Also provided authorization simulation logic, the value for token is \`jwt-simulation-token\`.
+       I didn't use \`@ApiBearerAuth()\` due to time-consuming implementation.`,
     )
     .setVersion('1.0')
     .build();

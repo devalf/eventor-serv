@@ -6,13 +6,22 @@ import {
   Param,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { LiveEventService } from './live-event.service';
 import { LiveEvent, LiveEventCreate, UpdateResultApiModel } from '../entities';
 
+import { AuthorizationSimulationInterceptor } from '../interceptors';
+
 @Controller('events')
 @ApiTags('Live Events')
+@UseInterceptors(AuthorizationSimulationInterceptor)
+@ApiHeader({
+  name: 'X-Authorization-Simulation',
+  description: 'Simulated token for authorization simulation',
+  required: true,
+})
 export class LiveEventController {
   constructor(private liveEventService: LiveEventService) {}
 

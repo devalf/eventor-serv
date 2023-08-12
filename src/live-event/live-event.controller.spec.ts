@@ -1,7 +1,6 @@
 import { LiveEventController } from './live-event.controller';
 import { LiveEventService } from './live-event.service';
-import { DataFactory } from 'nestjs-seeder';
-import { LiveEvent } from '../entities';
+import { generateLiveEvents } from '../utils';
 
 describe('LiveEventController', () => {
   let liveEventController: LiveEventController;
@@ -13,8 +12,7 @@ describe('LiveEventController', () => {
   });
 
   it('should return collection of `Live Events`', async () => {
-    const generatedCollection =
-      DataFactory.createForClass(LiveEvent).generate(1);
+    const generatedCollection = generateLiveEvents(1);
 
     jest
       .spyOn(liveEventService, 'getLiveEvents')

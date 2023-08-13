@@ -19,7 +19,7 @@ in requests to the API.
 
 You can optionally seed the DB with the command `npm run seed` to get some initial data.
 
-UT samples are provided for part of the code.
+UT samples are provided for part of the code. With e2e tests covered all endpoints and all possible cases.
 ```
 
 API could be tested with Swagger UI on the following URL: [http://localhost:8050/api#/](http://localhost:8050/api#/).
@@ -55,6 +55,9 @@ $ npm run start:prod
 ```bash
 # unit tests
 $ npm run test
+
+# e2e tests (be sure that the app is running!)
+$ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
